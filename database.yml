@@ -1,6 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: put_your_host_name
+  user: put_your_user_name
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 

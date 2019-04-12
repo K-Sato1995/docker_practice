@@ -1,17 +1,19 @@
-version: '3.6'
-
+version: "3"
 services:
-  web:
+  app:
     build: .
+    command: "bundle exec rails server -b 0.0.0.0"
     volumes:
-      - ./:/app
-    working_dir: /app
-    command: puma
+      - .:/myapp
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://postgres@db
-  db:
-    image: postgres:10.3-alpine
+      - postgres
+  postgres:
+    image: "postgres:alpine"
+    ports:
+      - "5432:5432"
+    volumes:
+      - server_db:/var/lib/postgresql/data
+volumes:
+  server_db:
